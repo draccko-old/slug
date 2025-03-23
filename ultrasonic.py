@@ -1,5 +1,5 @@
 try:
-    import RPi.GPIO as GPIO
+    import RPi.GPIO as GPIO #type:ignore
     print("Current platform: Raspi.")
     status = True
 except ImportError as e:
