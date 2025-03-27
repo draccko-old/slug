@@ -17,7 +17,6 @@ if status:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(TRIG, GPIO.OUT)
     GPIO.setup(ECHO, GPIO.IN)
-    GPIO.setup(LED_PIN, GPIO.OUT)
 
 def measure_distance():
     if status:
