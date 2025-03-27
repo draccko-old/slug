@@ -40,7 +40,7 @@ def explore():
         else:
             pwm_left.ChangeDutyCycle(90)  # Adjust speed here (0-100)
             pwm_right.ChangeDutyCycle(90) # Adjust speed here (0-100)
-            time.sleep(.1)
+            
     else:
         print("Cannot start exploration right now, not on real hardware.")
 

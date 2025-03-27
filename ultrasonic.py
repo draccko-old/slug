@@ -40,7 +40,7 @@ def measure_distance():
             pulse_end = time.time()  # Capture the time when the pulse goes HIGH
 
         # If either pulse_start or pulse_end is still 0, there's an issue with the sensor
-        if pulse_start == 0 or pulse_end == 0:
+        if pulse_start == 0 or pulse_end == 0: 
             return -1  # Return -1 to indicate an error in reading
 
         # Calculate the distance based on time
