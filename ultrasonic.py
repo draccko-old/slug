@@ -13,8 +13,7 @@ if status:
     # Set up GPIO pins
     TRIG = 24
     ECHO = 23
-    LED_PIN = 25
-
+    
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(TRIG, GPIO.OUT)
     GPIO.setup(ECHO, GPIO.IN)
