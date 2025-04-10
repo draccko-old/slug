@@ -7,8 +7,9 @@ except ImportError as e:
     status = False
 import ultrasonic
 import time
+startStamp = 0
 
-if status:
+if status: # init
     # Define GPIO pins for the left and right wheels
     leftWheel = 12
     rightWheel = 16
@@ -28,23 +29,20 @@ if status:
     pwm_left.start(0)
     pwm_right.start(0)
 
-def explore():
-    if status:
-        if ultrasonic.measure_distance() < 20:
-            # Set PWM duty cycle to turn motors on. 
-            # Adjust the duty cycle (0-100) for speed control.
-            
-            # Move forward
-            pwm_left.ChangeDutyCycle(90)  # Adjust speed here (0-100)
-            pwm_right.ChangeDutyCycle(-90)  # Adjust speed here (0-100)
-        else:
-            pwm_left.ChangeDutyCycle(90)  # Adjust speed here (0-100)
-            pwm_right.ChangeDutyCycle(90) # Adjust speed here (0-100)
-            
-    else:
-        print("Cannot start exploration right now, not on real hardware.")
+def avoid()
+    # Set PWM duty cycle to turn motors on. 
+    # Adjust the duty cycle (0-100) for speed control.
+                
+    # Move forward
+    pwm_left.ChangeDutyCycle(90)  # Adjust speed here (0-100)
+    pwm_right.ChangeDutyCycle(-90)  # Adjust speed here (0-100)
 
+def start()
+    pwm_left.ChangeDutyCycle(90)  # Adjust speed here (0-100)
+    pwm_right.ChangeDutyCycle(90) # Adjust speed here (0-100)
+    startStamp = time.time
 def stop():
     if status:
         pwm_left.ChangeDutyCycle(0)
         pwm_right.ChangeDutyCycle(0)
+    return startStamp - time.time
