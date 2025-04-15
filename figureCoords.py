@@ -1,6 +1,7 @@
 import math
 import wheelWriteThrowback
 import directionPassthrough
+import time
 
 currentPosition = (0, 0)  # Starting position (x, y)
 
@@ -29,6 +30,7 @@ def listenOnWheelRuntime():
                 round(calcDistance(0.01) * math.cos(angleToRadians)),
                 round(calcDistance(0.01) * math.sin(angleToRadians)),
             )
+            time.Sleep(0.01)
 
 def init():
     global currentPosition

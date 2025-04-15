@@ -1,14 +1,16 @@
 import ultrasonic
 import figureCoords  # type:ignore
 import exploration  # type:ignore
-
-mps = 0
-explorating = True
+import time  # type:ignore
+from slug import *
 
 print(ultrasonic.measure_distance())
 print(figureCoords.getPointCoordinates(0, 1, 1, 90))
-
-if explorating:
-    exploration.currentDirection = 0  # Set initial direction (e.g., 0 degrees)
-    exploration.explore()
+startStamp = time.Time()
+while True():
+    while time.Time - startStamp <= 600:
+        exploration.exploring = True
+    while time.Time - startStamp >= 600 :
+        exploration.exploring = False
+    
 
