@@ -9,6 +9,9 @@ import ultrasonic
 import time
 import figureCoords
 import random
+import wheelWriteThrowback
+
+
 startStamp = 0
 
 if status: # init
@@ -40,7 +43,9 @@ def explore():
         while ultrasonic.measure_distance() > 30:
             # Move forward
             pwmLeft.ChangeDutyCycle(90)
+            wheelWriteThrowback.writePWM(90, "left")
             pwmRight.ChangeDutyCycle(90)
+            wheelWriteThrowback.writePWM(90, "right")
         if ultrasonic.measure_distance() <= 30:
             avoid()
 
@@ -48,7 +53,9 @@ def oneSecondCicle():
     progressTime = time.time()
     while progressTime - time.time >= 1:      
         pwmLeft.ChangeDutyCycle(90)  # Adjust speed here (0-100)
+        wheelWriteThrowback.writePWM(90, "left")    
         pwmRight.ChangeDutyCycle(90)  # Adjust speed here (0-100)
+        wheelWriteThrowback.writePWM(90, "right")
         if ultrasonic.measure_distance() <= 30:
                 progressTime -= 2
                 avoid()
@@ -59,19 +66,28 @@ def avoid():
     global currentDirection
     
     pwmLeft.ChangeDutyCycle(90)  # Adjust speed here (0-100)
+    wheelWriteThrowback.writePWM(90, "left")
     pwmRight.ChangeDutyCycle(-90)  # Adjust speed here (0-100)
+    wheelWriteThrowback.writePWM(-90, "right")
     time.sleep(2)  # Turn for 1 second
     pwmLeft.ChangeDutyCycle(0)
+    wheelWriteThrowback.writePWM(0, "left")
     pwmRight.ChangeDutyCycle(0)
+    wheelWriteThrowback.writePWM(0, "right")
 
 def start():
     exploring = True  # Start exploring
-    pwmLeft.ChangeDutyCycle(90)  # Adjust speed here (0-100)
+    pwmLeft.ChangeDutyCycle(90)
+    wheelWriteThrowback.writePWM(90, "left")
+      # Adjust speed here (0-100)
     pwmRight.ChangeDutyCycle(90)  # Adjust speed here (0-100)
+    wheelWriteThrowback.writePWM(90, "right")
 
 def stop():
     if status:
         exploring = False  # Stop exploring
         pwmLeft.ChangeDutyCycle(0)
+        wheelWriteThrowback.writePWM(0, "left")
         pwmRight.ChangeDutyCycle(0)
+        wheelWriteThrowback.writePWM(0, "right")
     return startStamp - time.time()

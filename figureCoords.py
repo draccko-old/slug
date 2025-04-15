@@ -1,4 +1,9 @@
 import math
+import wheelWriteThrowback
+import directionPassthrough
+
+currentPosition = (0, 0)  # Starting position (x, y)
+
 
 def getPointCoordinates(x0, y0, distance, angleDegrees):
     angleRadians = math.radians(angleDegrees)  # Convert angle to radians
@@ -17,5 +22,15 @@ def calcDistance(timeSeconds):
 
 
 def listenOnWheelRuntime():
-    while True():
-        if 
+    while True:
+        while wheelWriteThrowback.leftPWMValue == 90 and wheelWriteThrowback.rightPWMValue == 90:
+            angleToRadians = math.radians(directionPassthrough.direction)
+            currentPosition += (
+                calcDistance(0.01) * math.cos(angleToRadians),
+                calcDistance(0.01) * math.sin(angleToRadians),
+            )
+
+def init():
+    global currentPosition
+    currentPosition = (0, 0)  # Reset to starting position
+    listenOnWheelRuntime()
