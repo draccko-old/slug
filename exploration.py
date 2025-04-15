@@ -38,16 +38,10 @@ currentDirection = 0  # Direction in degrees (0 = forward, 90 = right, etc.)
 currentPosition = (0, 0)  # Starting position (x, y)
 exploring = True # Flag to indicate if the robot is exploring
 
+
+
 def explore():
-    while exploring:
-        while ultrasonic.measure_distance() > 30:
-            # Move forward
-            pwmLeft.ChangeDutyCycle(90)
-            wheelWriteThrowback.writePWM(90, "left")
-            pwmRight.ChangeDutyCycle(90)
-            wheelWriteThrowback.writePWM(90, "right")
-        if ultrasonic.measure_distance() <= 30:
-            avoid()
+    oneSecondCicle() # i dont know what i was thinking when i overcomplicated this so much
 
 def oneSecondCicle():
     progressTime = time.time()
@@ -59,9 +53,8 @@ def oneSecondCicle():
         if ultrasonic.measure_distance() <= 30:
                 progressTime -= 2
                 avoid()
+    print("holy crap i actually did it")
     
-    
-
 def avoid():
     global currentDirection
     
@@ -91,3 +84,9 @@ def stop():
         pwmRight.ChangeDutyCycle(0)
         wheelWriteThrowback.writePWM(0, "right")
     return startStamp - time.time()
+
+while exploring:
+    explore()
+while not exploring:
+    stop()
+    print("Exploration stopped.")

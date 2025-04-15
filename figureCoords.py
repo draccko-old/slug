@@ -26,8 +26,8 @@ def listenOnWheelRuntime():
         while wheelWriteThrowback.leftPWMValue == 90 and wheelWriteThrowback.rightPWMValue == 90:
             angleToRadians = math.radians(directionPassthrough.direction)
             currentPosition += (
-                calcDistance(0.01) * math.cos(angleToRadians),
-                calcDistance(0.01) * math.sin(angleToRadians),
+                round(calcDistance(0.01) * math.cos(angleToRadians)),
+                round(calcDistance(0.01) * math.sin(angleToRadians)),
             )
 
 def init():
