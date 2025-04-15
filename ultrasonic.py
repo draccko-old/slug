@@ -11,41 +11,41 @@ import random
 
 if status:
     # Set up GPIO pins
-    TRIG = 24
-    ECHO = 23
+    trig = 24
+    echo = 23
     
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(TRIG, GPIO.OUT)
-    GPIO.setup(ECHO, GPIO.IN)
+    GPIO.setup(trig, GPIO.OUT)
+    GPIO.setup(echo, GPIO.IN)
 
-def measure_distance():
+def measureDistance():
     if status:
         # Send a pulse to trigger the sensor
-        GPIO.output(TRIG, GPIO.LOW)
+        GPIO.output(trig, GPIO.LOW)
         time.sleep(0.5)
-        GPIO.output(TRIG, GPIO.HIGH)
+        GPIO.output(trig, GPIO.HIGH)
         time.sleep(0.00001)
-        GPIO.output(TRIG, GPIO.LOW)
+        GPIO.output(trig, GPIO.LOW)
 
         # Wait for the response from the sensor
-        pulse_start = 0
-        pulse_end = 0
+        pulseStart = 0
+        pulseEnd = 0
 
-        # Wait until the ECHO pin goes HIGH
-        while GPIO.input(ECHO) == GPIO.LOW:
-            pulse_start = time.time()  # Capture the time when the pulse is LOW
+        # Wait until the echo pin goes HIGH
+        while GPIO.input(echo) == GPIO.LOW:
+            pulseStart = time.time()  # Capture the time when the pulse is LOW
 
-        # Wait until the ECHO pin goes LOW
-        while GPIO.input(ECHO) == GPIO.HIGH:
-            pulse_end = time.time()  # Capture the time when the pulse goes HIGH
+        # Wait until the echo pin goes LOW
+        while GPIO.input(echo) == HIGH:
+            pulseEnd = time.time()  # Capture the time when the pulse goes HIGH
 
-        # If either pulse_start or pulse_end is still 0, there's an issue with the sensor
-        if pulse_start == 0 or pulse_end == 0: 
+        # If either pulseStart or pulseEnd is still 0, there's an issue with the sensor
+        if pulseStart == 0 or pulseEnd == 0: 
             return -1  # Return -1 to indicate an error in reading
 
         # Calculate the distance based on time
-        pulse_duration = pulse_end - pulse_start
-        distance = pulse_duration * 17150  # Speed of sound in cm/s
+        pulseDuration = pulseEnd - pulseStart
+        distance = pulseDuration * 17150  # Speed of sound in cm/s
         distance = round(distance, 2)  # Round to two decimal places
 
         return distance
