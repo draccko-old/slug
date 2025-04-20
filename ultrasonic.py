@@ -11,8 +11,8 @@ import random
 
 if status:
     # Set up GPIO pins
-    trig = 24
-    echo = 23
+    trig = 27
+    echo = 22
     
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(trig, GPIO.OUT)
@@ -22,9 +22,8 @@ def measureDistance():
     if status:
         # Send a pulse to trigger the sensor
         GPIO.output(trig, GPIO.LOW)
-        time.sleep(0.5)
         GPIO.output(trig, GPIO.HIGH)
-        time.sleep(0.00001)
+        time.sleep(0.01)
         GPIO.output(trig, GPIO.LOW)
 
         # Wait for the response from the sensor
@@ -51,3 +50,7 @@ def measureDistance():
         return distance
     else:
         return random.randrange(10, 3000)
+    
+
+while True:
+    print(measureDistance())

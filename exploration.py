@@ -17,8 +17,8 @@ startStamp = 0
 
 if status: # init
     # Define GPIO pins for the left and right wheels
-    leftWheel = 12
-    rightWheel = 16
+    leftWheel = 23
+    rightWheel = 17
     
     # Set the GPIO mode to BCM
     GPIO.setmode(GPIO.BCM)
@@ -88,6 +88,6 @@ def stop():
 
 while exploring:
     explore()
-while not exploring:
+while not exploring: 
     stop()
     print("Exploration stopped.")
