@@ -36,7 +36,7 @@ def measureDistance():
             pulseStart = time.time()  # Capture the time when the pulse is LOW
 
         # Wait until the echo pin goes LOW
-        while GPIO.input(echo) == HIGH:
+        while GPIO.input(echo) == GPIO.HIGH:
             pulseEnd = time.time()  # Capture the time when the pulse goes HIGH
 
         # If either pulseStart or pulseEnd is still 0, there's an issue with the sensor
